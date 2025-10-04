@@ -44,10 +44,22 @@ function RouteComponent() {
   });
 
   useEffect(() => {
-    // @ts-expect-error window
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    // @ts-expect-error window
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    function tryPushAds() {
+      if (window.adsbygoogle) {
+        window.adsbygoogle.push({});
+        window.adsbygoogle.push({});
+        return true;
+      }
+      return false;
+    }
+    if (!tryPushAds()) {
+      const interval = setInterval(() => {
+        if (tryPushAds()) {
+          clearInterval(interval);
+        }
+      }, 500);
+      setTimeout(() => clearInterval(interval), 5000);
+    }
   }, []);
 
   return (

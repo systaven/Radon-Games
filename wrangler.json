@@ -1,5 +1,5 @@
 {
-  "name": "radon-games",
+  "name": "games",
   "compatibility_date": "2025-10-04",
   "assets": {
     "directory": "./dist"
